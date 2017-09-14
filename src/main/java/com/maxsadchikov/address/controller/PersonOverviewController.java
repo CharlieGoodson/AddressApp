@@ -6,6 +6,7 @@ import com.maxsadchikov.address.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +34,10 @@ public class PersonOverviewController implements Initializable {
     private Label birthdayLabel;
     @FXML
     private Button deleteBtn;
+    @FXML
+    private Button newBtn;
+    @FXML
+    private Button editBtn;
 
     private MainApp mainApp;
 
@@ -88,7 +93,45 @@ public class PersonOverviewController implements Initializable {
             personTable.getItems().remove(selectedIndex);
         } else {
             // Ничего не выбрано.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * Вызывается, когда пользователь кликает по кнопке New...
+     * Открывает диалоговое окно с дополнительной информацией нового адресата.
+     */
+    @FXML
+    private void handleNewPerson() {
+        Person tempPerson = new Person();
+        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        if (okClicked) {
+            mainApp.getPersonData().add(tempPerson);
+        }
+    }
+
+    /**
+     * Вызывается, когда пользователь кликает по кнопка Edit...
+     * Открывает диалоговое окно для изменения выбранного адресата.
+     */
+    @FXML
+    private void handleEditPerson() {
+        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+            if (okClicked) {
+                showPersonDetails(selectedPerson);
+            }
+
+        } else {
+            // Ничего не выбрано.
+            Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("No Selection");
             alert.setHeaderText("No Person Selected");
