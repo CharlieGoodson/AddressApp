@@ -24,15 +24,15 @@ public class MainApp extends Application {
 
     public MainApp() {
 
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
+        personData.add(new Person("Андрей", "Соколов"));
+        personData.add(new Person("Паша", "Рябцев"));
+        personData.add(new Person("Иннокентий", "Рулез"));
+        personData.add(new Person("Александра", "Мейер"));
+        personData.add(new Person("Катерина", "Машинина"));
+        personData.add(new Person("Сергей", "Кондратюк"));
+        personData.add(new Person("Анна", "Кричевская"));
+        personData.add(new Person("Стефан", "Однопулос"));
+        personData.add(new Person("Мартин", "Миллер"));
     }
 
     public ObservableList<Person> getPersonData() {

@@ -41,10 +41,6 @@ public class PersonOverviewController implements Initializable {
 
     private MainApp mainApp;
 
-    public PersonOverviewController() {
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
