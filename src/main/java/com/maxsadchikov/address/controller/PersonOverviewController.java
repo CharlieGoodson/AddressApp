@@ -3,6 +3,7 @@ package com.maxsadchikov.address.controller;
 import com.maxsadchikov.address.MainApp;
 import com.maxsadchikov.address.model.Person;
 import com.maxsadchikov.address.util.DateUtil;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -83,7 +84,7 @@ public class PersonOverviewController implements Initializable {
     }
 
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeletePerson(ActionEvent event) {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
@@ -104,7 +105,7 @@ public class PersonOverviewController implements Initializable {
      * Открывает диалоговое окно с дополнительной информацией нового адресата.
      */
     @FXML
-    private void handleNewPerson() {
+    private void handleNewPerson(ActionEvent event) {
         Person tempPerson = new Person();
         boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
         if (okClicked) {
@@ -117,7 +118,7 @@ public class PersonOverviewController implements Initializable {
      * Открывает диалоговое окно для изменения выбранного адресата.
      */
     @FXML
-    private void handleEditPerson() {
+    private void handleEditPerson(ActionEvent event) {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
             boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
