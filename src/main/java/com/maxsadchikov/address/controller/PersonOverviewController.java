@@ -84,7 +84,7 @@ public class PersonOverviewController implements Initializable {
     }
 
     @FXML
-    private void handleDeletePerson(ActionEvent event) {
+    public void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
