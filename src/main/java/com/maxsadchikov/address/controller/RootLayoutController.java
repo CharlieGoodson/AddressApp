@@ -119,8 +119,11 @@ public class RootLayoutController {
         System.exit(0);
     }
 
+    /**
+     * Открывает статистику дней рождений.
+     */
     @FXML
-    private void delete() {
-        mainApp.deleteItem();
+    private void handleShowBirthdayStatistics() {
+        mainApp.showBirthdayStatistics();
     }
 }

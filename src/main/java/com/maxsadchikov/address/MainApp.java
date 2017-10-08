@@ -1,5 +1,6 @@
 package com.maxsadchikov.address;
 
+import com.maxsadchikov.address.controller.BirthdayStatisticsController;
 import com.maxsadchikov.address.controller.PersonEditDialogController;
 import com.maxsadchikov.address.controller.PersonOverviewController;
 import com.maxsadchikov.address.controller.RootLayoutController;
@@ -29,7 +30,6 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    PersonOverviewController controller;
 
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
@@ -98,7 +98,6 @@ public class MainApp extends Application {
 
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
-            this.controller = controller;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -247,8 +246,31 @@ public class MainApp extends Application {
         }
     }
 
-    public void deleteItem() {
-        controller.handleDeletePerson();
+    /**
+     * Открывает диалоговое окно для вывода статистики дней рождений.
+     */
+    public void showBirthdayStatistics() {
+        try {
+            // Загружает fxml-файл и создаёт новую сцену для всплывающего окна.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/BirthdayStatistics.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthday Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Передаёт адресатов в контроллер.
+            BirthdayStatisticsController controller = loader.getController();
+            controller.setPersonData(personData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Stage getPrimaryStage() {
